@@ -8,8 +8,12 @@ do
   sanitised_symlink=`echo $symlink | sed  's/^\.\///'`
   # change dot.dotfile to .dotfile
   symlink_filename=`basename $symlink | sed 's/^dot//'`
-  
+
   ln -s "$CURRENT_DIRECTORY/$sanitised_symlink" "$HOME/$symlink_filename"
 done
 
+for setup in $(find . -type f -name setup*)
+do
+  . $setup
+done
 
