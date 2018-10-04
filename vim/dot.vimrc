@@ -15,7 +15,7 @@ syntax on
 filetype plugin indent on
 
 set t_Co=256
-colorscheme Mustang_Vim_Colorscheme_by_hcalves
+colorscheme mustang_vim_colorscheme_by_hcalves
 
 
 " Display an incomplete command in the lower right corner of the Vim window
