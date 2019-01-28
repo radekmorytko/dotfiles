@@ -38,4 +38,5 @@ map <F2> :NERDTreeToggle<CR>
 map <F3> :NERDTreeFind<CR>
 " }}
 
-
+" Display trailing space when writing
+set list listchars=tab:→\ ,trail:·
