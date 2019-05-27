@@ -17,6 +17,8 @@ filetype plugin indent on
 set t_Co=256
 colorscheme mustang_vim_colorscheme_by_hcalves
 
+" integrating with powerline fonts
+"let g:airline_powerline_fonts = 1
 
 " Display an incomplete command in the lower right corner of the Vim window
 set showcmd
