@@ -7,3 +7,6 @@
 [submodule "vim/plugins/vim-airline"]
 	path = vim/plugins/vim-airline
 	url = https://github.com/vim-airline/vim-airline
+[submodule "vim/plugins/kotlin-vim"]
+	path = vim/plugins/kotlin-vim
+	url = https://github.com/udalov/kotlin-vim
