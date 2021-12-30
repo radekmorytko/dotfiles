@@ -12,7 +12,7 @@ BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 sudo ln -fs /usr/share/zoneinfo/Poland /etc/localtime
 # custom: install core packages
 sudo apt-get update
-sudo apt-get install -y -qq build-essential git python3 curl lsb-release locales
+sudo apt-get install -y -qq build-essential python3 curl lsb-release
 
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive

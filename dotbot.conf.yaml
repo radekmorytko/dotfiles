@@ -17,12 +17,6 @@
 
 - shell:
   -
-    description: Generates locales
-    command: |
-      sudo locale-gen pl_PL; \
-      sudo locale-gen pl_PL.UTF-8; \
-      sudo update-locale LANG="pl_PL.UTF-8" LANGUAGE="pl_PL"
-  -
     description: Adds neovim PPA
     command: |
       grep -q neovim /etc/apt/sources.list || sudo tee -a /etc/apt/sources.list > /dev/null <<EOT
