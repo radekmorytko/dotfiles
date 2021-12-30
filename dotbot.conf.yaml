@@ -14,7 +14,6 @@
     ~/.config/kitty:
     ~/.config/i3:
 
-
 - shell:
   -
     description: Adds neovim PPA
@@ -57,6 +56,11 @@
     #command: |
     #curl 'https://downloads.slack-edge.com/releases/linux/4.23.0/prod/x64/slack-desktop-4.23.0-amd64.deb' --compressed --output /tmp/slack.deb; \
     #sudo dpkg -i /tmp/slack.deb
+  -
+    description: Installs Fira Code font
+    command: |
+      sudo test ! -L /usr/share/fonts/opentype/furacode && sudo ln -s $(pwd)/fonts/furacode /usr/share/fonts/opentype/furacode; \
+      sudo fc-cache -f -r
   -
     description: Installs packages
     stdout: true
