@@ -166,8 +166,18 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         position top
-        status_command i3status
-        tray_padding 0
+        status_command i3status --config ~/.config/i3status/config-top
+        tray_output primary
+        workspace_buttons yes
+        font pango:FuraCode Nerd Font Mono 10
+}
+
+bar {
+        position bottom
+        status_command i3status --config ~/.config/i3status/config-bottom
+        tray_output none
+        workspace_buttons no
+        font pango:FuraCode Nerd Font Mono 11
 }
 
 # ------ Gaps
