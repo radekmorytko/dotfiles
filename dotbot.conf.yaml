@@ -62,8 +62,7 @@
     stdout: true
     stderr: true
     command: |
-      xargs -a .apt-bare-ubuntu.list sudo apt-get install -y -q
-  #- [xargs -a .apt.list sudo apt-get install -y -qq, Installing required packages]
+      xargs -a .apt.list sudo apt-get install -y -q
   -
     description: Configures nvim
     stdout: true

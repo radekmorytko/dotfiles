@@ -2,8 +2,9 @@
 
 * git clone git@github.com:radekmorytko/dotfiles.git
 * `cd dotfiles && ./install`
-* change window manager (https://askubuntu.com/questions/143376/how-to-change-the-xfce4-default-window-manager)
-  * `xfconf-query --channel xfce4-session --property /sessions/Failsafe/Client0_Command --type string --set i3 --force-array`
+* ~change window manager (https://askubuntu.com/questions/143376/how-to-change-the-xfce4-default-window-manager)~
+  * ~`xfconf-query --channel xfce4-session --property /sessions/Failsafe/Client0_Command --type string --set i3 --force-array`~
+
 
 # Tests
 
