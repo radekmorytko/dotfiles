@@ -100,10 +100,6 @@ require('lualine').setup {
 -- Telescope configuration
 require('telescope').setup {
     defaults = {
-        --vimgrep_arguments = {
-            --'ag',
-            --'--vimgrep'
-        --},
         color_devicons = true,
 
         file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
@@ -120,7 +116,7 @@ require('telescope').setup {
 require('telescope').load_extension('fzy_native')
 
 -- Mappings for Telescope
-vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files({find_command={'ag', '-g', '.'}})<cr>]], { noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>ag', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader>bf', [[<cmd>lua require('telescope.builtin').file_browser()<cr>]], { noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})

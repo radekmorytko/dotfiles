@@ -4,3 +4,7 @@ ripgrep
 neovim
 docker-ce docker-ce-cli containerd.io
 spotify-client
+jq
+fd-find
+fzf
+flameshot
