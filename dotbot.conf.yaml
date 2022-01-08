@@ -16,6 +16,8 @@
     ~/.config/i3status:
     ~/.xprofile:
     ~/.radek_bashrc:
+    ~/.radek_work_bashrc:
+      path: dotfiles-work/radek_work_bashrc
 
 - shell:
   -

@@ -15,6 +15,11 @@ show_virtual_env() {
 export -f show_virtual_env
 # copied from https://github.com/direnv/direnv/wiki/Python#bash - END
 
+
+if [ -f ~/.radek_work_bashrc ]; then
+    . ~/.radek_work_bashrc
+fi
+
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 

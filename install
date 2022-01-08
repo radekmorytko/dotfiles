@@ -14,6 +14,9 @@ sudo ln -fs /usr/share/zoneinfo/Poland /etc/localtime
 sudo apt-get update
 sudo apt-get install -y -qq build-essential python3 curl lsb-release
 
+git -C dotfiles-work submodule sync --recursive
+git submodule update --init --recursive dotfiles-work
+
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
