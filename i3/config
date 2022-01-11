@@ -190,9 +190,7 @@ bar {
         font pango:FuraCode Nerd Font Mono 11
 }
 
-# gaps inner $inner_gaps
-# gaps outer $outer_gaps
-
+bindsym $mod+p exec flameshot gui
 
 # ------ startup
 
@@ -223,8 +221,6 @@ assign [class=$window_private_browser_class] $ws4
 
 # --no-startup-id is implied (in $term)
 exec $term --class $window_work_terminal_class
-
-exec --no-startup-id flameshot
 
 exec --no-startup-id spotify
 exec --no-startup-id slack
