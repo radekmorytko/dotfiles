@@ -20,6 +20,8 @@
     ~/.radek_bashrc:
     ~/.radek_work_bashrc:
       path: dotfiles-work/radek_work_bashrc
+    ~/.local/bin/git-prompt.sh:
+      path: /usr/lib/git-core/git-sh-prompt
 
 - shell:
   -
