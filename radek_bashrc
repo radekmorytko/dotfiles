@@ -5,7 +5,7 @@ set_aws_profile() {
 show_aws_profile() {
     echo "(aws: $AWS_PROFILE) "
 }
-#
+
 # copied from https://github.com/direnv/direnv/wiki/Python#bash - BEGIN
 show_virtual_env() {
   if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
@@ -35,3 +35,4 @@ GIT_PS1_SHOWDIRTYSTATE=true
 export PS1='$(show_aws_profile)$(show_virtual_env)\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[01;34m\]\W\[\033[00m\]\n$(__git_ps1 "( %s) ")\$ '
 
 export EDITOR=nvim
+export HOST_IP=$(ip route get 1 | awk '{print $(NF-2);exit}')
