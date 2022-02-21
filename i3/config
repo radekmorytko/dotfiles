@@ -1,7 +1,7 @@
 ## Variables
 set $mod Mod1
 
-set $browser google-chrome --profile-directory="Default"
+set $browser google-chrome --user-data-dir="/home/radek/.config/google-chrome" --class="$window_private_browser_class"
 
 set $inner_gaps 3
 set $outer_gaps 0
@@ -11,7 +11,9 @@ set $term --no-startup-id kitty
 set $monitor_output HDMI-2
 set $laptop_output eDP-1
 
-set $window_work_terminal_class work-terminal
+set $window_work_terminal_backend_class work-terminal-backend
+set $window_work_terminal_live_class work-terminal-live
+set $window_work_terminal_misc_class work-terminal-misc
 set $window_work_1_browser_class work-1-google-chrome
 set $window_work_2_browser_class work-2-google-chrome
 set $window_private_browser_class private-google-chrome
@@ -102,16 +104,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: work-terminal"
-set $ws2 "2: work-1-browser"
-set $ws3 "3: work-2-browser"
-set $ws4 "4: private-browser"
-set $ws5 "5"
+set $ws1 "1: work-terminal-backend"
+set $ws2 "2: work-terminal-live"
+set $ws3 "3: work-terminal-misc"
+set $ws4 "4: work-1-browser"
+set $ws5 "5: private-browser"
 set $ws6 "6"
 set $ws7 "7: signal"
 set $ws8 "8: slack"
 set $ws9 "9: spotify"
-set $ws10 "10"
+set $ws10 "10: work-2-browser"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -201,26 +203,34 @@ exec synclient VertScrollDelta=-71 synclient HorizScrollDelta=-71
 workspace $ws1 output $monitor_output
 workspace $ws2 output $monitor_output
 workspace $ws3 output $monitor_output
+workspace $ws4 output $monitor_output
+workspace $ws5 output $monitor_output
 
+workspace $ws6 output $laptop_output
 workspace $ws7 output $laptop_output
 workspace $ws8 output $laptop_output
 workspace $ws9 output $laptop_output
+workspace $ws10 output $laptop_output
 
 # apps to show on the laptop
 for_window [class="Spotify"] move container to workspace $ws9
 assign [class="Signal"] $ws7
 assign [class="Slack"] $ws8
 
-assign [class=$window_work_terminal_class] $ws1
+assign [class=$window_work_terminal_backend_class] $ws1
+assign [class=$window_work_terminal_live_class] $ws2
+assign [class=$window_work_terminal_misc_class] $ws3
 
 # browser-workspace assignments
-assign [class=$window_work_1_browser_class] $ws2
-assign [class=$window_work_2_browser_class] $ws3
+assign [class=$window_work_1_browser_class] $ws4
+assign [class=$window_work_2_browser_class] $ws10
 
-assign [class=$window_private_browser_class] $ws4
+assign [class=$window_private_browser_class] $ws5
 
 # --no-startup-id is implied (in $term)
-exec $term --class $window_work_terminal_class
+exec $term --class $window_work_terminal_backend_class
+exec $term --class $window_work_terminal_live_class
+exec $term --class $window_work_terminal_misc_class
 
 exec --no-startup-id spotify
 exec --no-startup-id slack
