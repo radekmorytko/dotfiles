@@ -66,6 +66,11 @@
     #curl 'https://downloads.slack-edge.com/releases/linux/4.23.0/prod/x64/slack-desktop-4.23.0-amd64.deb' --compressed --output /tmp/slack.deb; \
     #sudo dpkg -i /tmp/slack.deb
   -
+    description: Installs Fura Mono Code font
+    command: |
+      sudo test ! -L /usr/share/fonts/opentype/furamono && sudo ln -s $(pwd)/fonts/furamono /usr/share/fonts/opentype/furamono; \
+      sudo fc-cache -f -r
+  -
     description: Installs Fira Code font
     command: |
       sudo test ! -L /usr/share/fonts/opentype/furacode && sudo ln -s $(pwd)/fonts/furacode /usr/share/fonts/opentype/furacode; \
