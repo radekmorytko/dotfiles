@@ -68,13 +68,13 @@
   -
     description: Installs Fura Mono Code font
     command: |
-      sudo test ! -L /usr/share/fonts/opentype/furamono && sudo ln -s $(pwd)/fonts/furamono /usr/share/fonts/opentype/furamono; \
-      sudo fc-cache -f -r
+      sudo test ! -L /usr/share/fonts/opentype/furamono && sudo ln -s $(pwd)/fonts/furamono /usr/share/fonts/opentype/furamono && \
+      sudo fc-cache -f -r || true
   -
     description: Installs Fira Code font
     command: |
-      sudo test ! -L /usr/share/fonts/opentype/furacode && sudo ln -s $(pwd)/fonts/furacode /usr/share/fonts/opentype/furacode; \
-      sudo fc-cache -f -r
+      sudo test ! -L /usr/share/fonts/opentype/furacode && sudo ln -s $(pwd)/fonts/furacode /usr/share/fonts/opentype/furacode && \
+      sudo fc-cache -f -r || true
   -
     description: Installs packages
     stdout: true

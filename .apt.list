@@ -1,4 +1,5 @@
 i3
+i3lock
 lxappearance
 ripgrep
 neovim
@@ -8,3 +9,4 @@ jq
 fd-find
 fzf
 flameshot
+xss-lock
