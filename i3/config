@@ -1,7 +1,7 @@
 ## Variables
 set $mod Mod1
 
-set $browser google-chrome --user-data-dir="/home/radek/.config/google-chrome" --class="$window_private_browser_class"
+set $browser browser_private()
 
 set $inner_gaps 3
 set $outer_gaps 0
@@ -15,7 +15,6 @@ set $window_work_terminal_backend_class work-terminal-backend
 set $window_work_terminal_live_class work-terminal-live
 set $window_work_terminal_misc_class work-terminal-misc
 set $window_work_1_browser_class work-1-google-chrome
-set $window_work_2_browser_class work-2-google-chrome
 set $window_private_browser_class private-google-chrome
 
 
@@ -104,16 +103,16 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: work-terminal-backend"
-set $ws2 "2: work-terminal-live"
-set $ws3 "3: work-terminal-misc"
-set $ws4 "4: work-1-browser"
+set $ws1 "1: wn-terminal-backend"
+set $ws2 "2: wn-terminal-live"
+set $ws3 "3: wn-terminal-misc"
+set $ws4 "4: wn-browser"
 set $ws5 "5: private-browser"
-set $ws6 "6"
-set $ws7 "7: signal"
-set $ws8 "8: slack"
-set $ws9 "9: spotify"
-set $ws10 "10: work-2-browser"
+set $ws6 "6: misc"
+set $ws7 "7: misc"
+set $ws8 "8: signal"
+set $ws9 "9: slack"
+set $ws10 "10: spotify"
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -213,9 +212,9 @@ workspace $ws9 output $laptop_output
 workspace $ws10 output $laptop_output
 
 # apps to show on the laptop
-for_window [class="Spotify"] move container to workspace $ws9
-assign [class="Signal"] $ws7
-assign [class="Slack"] $ws8
+for_window [class="Spotify"] move container to workspace $ws10
+assign [class="Signal"] $ws8
+assign [class="Slack"] $ws9
 
 assign [class=$window_work_terminal_backend_class] $ws1
 assign [class=$window_work_terminal_live_class] $ws2
@@ -223,8 +222,6 @@ assign [class=$window_work_terminal_misc_class] $ws3
 
 # browser-workspace assignments
 assign [class=$window_work_1_browser_class] $ws4
-assign [class=$window_work_2_browser_class] $ws10
-
 assign [class=$window_private_browser_class] $ws5
 
 # --no-startup-id is implied (in $term)
@@ -237,5 +234,4 @@ exec --no-startup-id slack
 exec --no-startup-id signal-desktop
 
 exec --no-startup-id google-chrome --user-data-dir="/home/radek/.config/google-chrome-work-1" --class="$window_work_1_browser_class"
-exec --no-startup-id google-chrome --user-data-dir="/home/radek/.config/google-chrome-work-2" --class="$window_work_2_browser_class"
-exec --no-startup-id google-chrome --user-data-dir="/home/radek/.config/google-chrome" --class="$window_private_browser_class"
+exec --no-startup-id browser_private
