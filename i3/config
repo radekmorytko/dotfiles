@@ -2,6 +2,7 @@
 set $mod Mod1
 
 set $browser browser_private()
+set $browser_work browser_work()
 
 set $inner_gaps 3
 set $outer_gaps 0
@@ -14,6 +15,8 @@ set $laptop_output eDP-1
 set $window_work_terminal_backend_class work-terminal-backend
 set $window_work_terminal_live_class work-terminal-live
 set $window_work_terminal_misc_class work-terminal-misc
+
+# TODO: the values of those vars are used in scripts in `~/.local/bin/`
 set $window_work_1_browser_class work-1-google-chrome
 set $window_private_browser_class private-google-chrome
 
@@ -45,6 +48,7 @@ floating_modifier $mod
 bindsym $mod+Return exec $term
 
 bindsym $mod+b exec $browser
+bindsym $mod+Shift+b exec $browser_work
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -233,5 +237,5 @@ exec --no-startup-id spotify
 exec --no-startup-id slack
 exec --no-startup-id signal-desktop
 
-exec --no-startup-id google-chrome --user-data-dir="/home/radek/.config/google-chrome-work-1" --class="$window_work_1_browser_class"
+exec --no-startup-id browser_work
 exec --no-startup-id browser_private
