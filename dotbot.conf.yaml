@@ -76,6 +76,12 @@
       sudo test ! -L /usr/share/fonts/opentype/furacode && sudo ln -s $(pwd)/fonts/furacode /usr/share/fonts/opentype/furacode && \
       sudo fc-cache -f -r || true
   -
+    description: Uninstalls packages
+    stdout: true
+    stderr: true
+    command: |
+      xargs -a .apt.list-to-purge sudo apt-get purge -y -q
+  -
     description: Installs packages
     stdout: true
     stderr: true
