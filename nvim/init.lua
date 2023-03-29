@@ -1,13 +1,9 @@
 -- meta-accessors: https://github.com/nanotee/nvim-lua-guide#using-meta-accessors
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.g.mapleader = " "
 
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.scrolloff = 8
-
 
 vim.o.incsearch = true
 vim.o.ignorecase = true
@@ -25,7 +21,6 @@ vim.opt.clipboard:append { "unnamedplus" }
 
 vim.o.showcmd = true -- Display an incomplete command in the lower right corner of the Vim window
 
-vim.g.mapleader = " "
 
 local paq_utils = require('user.bootstrap')
 paq_utils.initialize()
@@ -41,7 +36,6 @@ vim.opt.completeopt = { 'menuone','noinsert','noselect' }
 --vim.cmd 'autocmd BufRead,BufNewFile *.ex,*.exs,mix.lock set filetype=elixir'
 
 -- Colorscheme settings
-
 vim.g.gruvbox_material_background = "medium"
 vim.cmd('colorscheme gruvbox-material')
 
@@ -49,40 +43,22 @@ vim.cmd('colorscheme gruvbox-material')
 vim.g.terraform_align = true
 vim.g.terraform_fmt_on_save = true
 
--- LSP
-local lsp_on_attach = function(client, bufnr)
-  require('completion').on_attach()
-
-  -- Mappings for LSP
-  local opts = { noremap=true, silent=true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'v', 'ga', ':<C-U>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>',  '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-end
-
---require 'lspconfig'.pyright.setup {
-    --on_attach=lsp_on_attach
---}
-
 -- tree-sitter
 require('nvim-treesitter.configs').setup {
-    ensure_installed = { "python", "elixir" },
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-    },
-    indent = {
-        enable = true
-    },
-    incremental_selection = {
-      enable = true
+  ensure_installed = { "python", "elixir", "lua" },
+  sync_install = false,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  indent = {
+    enable = true
+  },
+  autopairs = {
+    enable = true
+  },
+  incremental_selection = {
+    enable = true
   }
 }
 
@@ -100,36 +76,164 @@ require('lualine').setup {
 
 -- Telescope configuration
 require('telescope').setup {
-    defaults = {
-        color_devicons = true,
+  defaults = {
+    color_devicons = true,
 
-        file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-        grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-        qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-    },
-    extensions = {
-        fzy_native = {
-            override_generic_sorter = true,
-            override_file_sorter = true,
-        }
+    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+  },
+  extensions = {
+    fzy_native = {
+      override_generic_sorter = true,
+      override_file_sorter = true,
     }
+  }
 }
 require('telescope').load_extension('fzy_native')
 
--- Mappings for Telescope
-vim.api.nvim_set_keymap('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>ag', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>fw', [[<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>') })<cr>]], { noremap = true, silent = true})
--- Git
-vim.api.nvim_set_keymap('n', '<leader>gf', [[<cmd>lua require('telescope.builtin').git_files()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gc', [[<cmd>lua require('telescope.builtin').git_commits()<cr>]], { noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>gb', [[<cmd>lua require('telescope.builtin').git_branches()<cr>]], { noremap = true, silent = true})
+-- MAPPINGS
 
+-- Modes:
+-- "n" - normal
+-- "i" - insert
+-- "v" - visual
+-- "x" - visual block
+-- "t" - term
+-- "c" - command
+
+-- Telescope
+--
+-- find files
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files)
+
+local set_keymap_if_env_var = function(env_name, mapping, f)
+  if os.getenv(env_name) then
+    vim.keymap.set(
+      'n',
+      mapping,
+      f
+    )
+  end
+end
+
+local find_files_in_matching_env_var = function(env_name, mapping)
+  f = function()
+    require('telescope.builtin').find_files({ search_dirs = {os.getenv(env_name)} })
+  end
+  return set_keymap_if_env_var(env_name, mapping, f)
+end
+
+local grep_files_in_matching_env_var = function(env_name, mapping)
+  f = function()
+    require('telescope.builtin').live_grep({ search_dirs = {os.getenv(env_name)} })
+  end
+  return set_keymap_if_env_var(env_name, mapping, f)
+end
+
+local grep_word_in_matching_env_var = function(env_name, mapping)
+  f = function()
+    require('telescope.builtin').grep_string({
+      search = vim.fn.expand('<cword>'),
+      search_dirs = {os.getenv(env_name)}
+    })
+  end
+  return set_keymap_if_env_var(env_name, mapping, f)
+end
+
+
+-- find in sources
+find_files_in_matching_env_var('NVIM_SRC_DIR', '<leader>fs')
+-- find in tests
+find_files_in_matching_env_var('NVIM_TEST_DIR', '<leader>ft')
+
+-- grep in sources
+grep_files_in_matching_env_var('NVIM_SRC_DIR', '<leader>gs')
+-- grep in tests
+grep_files_in_matching_env_var('NVIM_TEST_DIR', '<leader>gt')
+
+-- grep word under the cursor everywhere
+vim.keymap.set('n', '<leader>ggw',
+  function()
+    require('telescope.builtin').grep_string({
+      search = vim.fn.expand('<cword>')
+    })
+  end
+)
+
+-- grep word (under cursor) in sources
+grep_word_in_matching_env_var('NVIM_SRC_DIR', '<leader>gws')
+grep_word_in_matching_env_var('NVIM_TEST_DIR', '<leader>gwt')
+
+
+-- find buffers
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers)
 
 -- Open new line below and above current line
-vim.api.nvim_set_keymap('n',  '<leader>o', 'o<esc>', {noremap=true})
-vim.api.nvim_set_keymap('n',  '<leader>O', 'O<esc>', {noremap=true})
+vim.keymap.set('n', '<leader>o', 'o<esc>')
+vim.keymap.set('n', '<leader>O', 'O<esc>')
 
 -- Fugitive
-vim.api.nvim_set_keymap('n',  '<leader>G', ':G<CR>', {noremap=true})
+vim.keymap.set('n', '<leader>G', ':G<CR>')
+
+-- LSP
+--vim.lsp.set_log_level("info")
+
+local lsp_on_attach = function(client, bufnr)
+  local nmap = function(keys, func, desc)
+    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+  end
+  nmap('<leader>rn', vim.lsp.buf.rename, '[r]e[n]ame')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+
+  -- Mappings for LSP
+  local opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', ':lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',  ':lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', ':lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gm', ':lua vim.lsp.buf.implementation()<CR>', opts)
+
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ga', ':lua vim.lsp.buf.code_action()<CR>', opts)
+
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>vd', ':lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', ':lua vim.diagnostic.goto_prev({border="rounded"})<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', ':lua vim.diagnostic.goto_next({border="rounded"})<CR>', opts)
+  --vim.api.nvim_buf_set_keymap(bufnr, 'v', 'ga', ':<C-U>lua vim.lsp.buf.range_code_action()<CR>', opts)
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  --vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-k>',  '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+end
+
+local servers = {
+  pyright = {
+    cmd = { "pyright-langserver", "--stdio", "--verbose" },
+    settings = {
+      python = {
+        pythonPath = '.venv/bin/python'
+      }
+    }
+  },
+}
+
+-- Setup mason so it can manage external tooling
+require('mason').setup()
+
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
+}
+
+
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      on_attach = lsp_on_attach,
+      cmd = servers[server_name]['cmd'],
+      settings = servers[server_name]['settings'],
+    }
+  end,
+}
+
+-- nvim-tree
+require("nvim-tree").setup()

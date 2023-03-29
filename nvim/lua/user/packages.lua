@@ -1,29 +1,36 @@
 
 local packages = {
-    'savq/paq-nvim';
-    'sainnhe/gruvbox-material';
+    'savq/paq-nvim',
+    'sainnhe/gruvbox-material',
 
-    'hashivim/vim-terraform';
-    'neovim/nvim-lspconfig';
-    'nvim-lua/completion-nvim';
+    'hashivim/vim-terraform',
 
     -- git-related
-    'tpope/vim-fugitive';
-    'airblade/vim-gitgutter';
+    'tpope/vim-fugitive',
+    'airblade/vim-gitgutter',
 
     -- status line plugins
-    'hoob3rt/lualine.nvim';
-    'kyazdani42/nvim-web-devicons';
+    'hoob3rt/lualine.nvim',
+    'kyazdani42/nvim-web-devicons',
 
     -- tree-sitter
-    'nvim-treesitter/nvim-treesitter'; -- TODO run TSUpdate
+    'nvim-treesitter/nvim-treesitter',
+
+    -- mason (manag)
+    'williamboman/mason.nvim',
+    "williamboman/mason-lspconfig.nvim",
 
     -- telescope plugins
-    'nvim-lua/popup.nvim';
-    'nvim-lua/plenary.nvim';
-    'nvim-telescope/telescope.nvim';
+    'nvim-lua/popup.nvim',
+    'nvim-lua/plenary.nvim',
+    'nvim-telescope/telescope.nvim',
     -- native extension to telescope
-    'nvim-telescope/telescope-fzy-native.nvim';
+    'nvim-telescope/telescope-fzy-native.nvim',
+
+    'neovim/nvim-lspconfig',
+
+    'kyazdani42/nvim-tree.lua',
+    'tpope/vim-sleuth',
 }
 
 return packages
