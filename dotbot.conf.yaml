@@ -12,6 +12,7 @@
     ~/.config/nvim:
         create: true # create parent dir
     ~/.config/kitty:
+    ~/.config/direnv:
     ~/.config/i3:
     ~/.config/i3status:
     ~/.config/dunst/dunstrc:
