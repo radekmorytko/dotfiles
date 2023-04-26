@@ -83,6 +83,18 @@ require('telescope').setup {
     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
   },
+  pickers = {
+    buffers = {
+      mappings = {
+        i = {
+          ['<C-d>'] = require('telescope.actions').delete_buffer
+        },
+        n = {
+          ['<C-d>'] = require('telescope.actions').delete_buffer
+        },
+      }
+    }
+  },
   extensions = {
     fzy_native = {
       override_generic_sorter = true,
