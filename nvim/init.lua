@@ -164,14 +164,17 @@ grep_files_in_matching_env_var('NVIM_SRC_DIR', '<leader>gs')
 -- grep in tests
 grep_files_in_matching_env_var('NVIM_TEST_DIR', '<leader>gt')
 
+-- grep everywhere
+vim.keymap.set('n', '<leader>gg', require('telescope.builtin').live_grep)
+
 -- grep word under the cursor everywhere
-vim.keymap.set('n', '<leader>ggw',
-  function()
-    require('telescope.builtin').grep_string({
-      search = vim.fn.expand('<cword>')
-    })
-  end
-)
+--vim.keymap.set('n', '<leader>ggw',
+--  function()
+--    require('telescope.builtin').grep_string({
+--      search = vim.fn.expand('<cword>')
+--    })
+--  end
+--)
 
 -- grep word (under cursor) in sources
 grep_word_in_matching_env_var('NVIM_SRC_DIR', '<leader>gws')
@@ -225,6 +228,7 @@ local servers = {
       }
     }
   },
+  elixirls = {},
 }
 
 -- Setup mason so it can manage external tooling
@@ -236,6 +240,9 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
 
 mason_lspconfig.setup_handlers {
   function(server_name)
@@ -243,8 +250,58 @@ mason_lspconfig.setup_handlers {
       on_attach = lsp_on_attach,
       cmd = servers[server_name]['cmd'],
       settings = servers[server_name]['settings'],
+      capabilities = capabilities,
     }
   end,
+  ["elixirls"] = function()
+    require('lspconfig').elixirls.setup {}
+  end,
+}
+
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+
+luasnip.config.setup {}
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete {},
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
 }
 
 -- nvim-tree
