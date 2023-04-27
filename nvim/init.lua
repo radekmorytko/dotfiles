@@ -134,21 +134,21 @@ local set_keymap_if_env_var = function(env_name, mapping, f)
 end
 
 local find_files_in_matching_env_var = function(env_name, mapping)
-  f = function()
+  local f = function()
     require('telescope.builtin').find_files({ search_dirs = {os.getenv(env_name)} })
   end
   return set_keymap_if_env_var(env_name, mapping, f)
 end
 
 local grep_files_in_matching_env_var = function(env_name, mapping)
-  f = function()
+  local f = function()
     require('telescope.builtin').live_grep({ search_dirs = {os.getenv(env_name)} })
   end
   return set_keymap_if_env_var(env_name, mapping, f)
 end
 
 local grep_word_in_matching_env_var = function(env_name, mapping)
-  f = function()
+  local f = function()
     require('telescope.builtin').grep_string({
       search = vim.fn.expand('<cword>'),
       search_dirs = {os.getenv(env_name)}
@@ -233,6 +233,7 @@ local servers = {
     }
   },
   elixirls = {},
+  lua_ls = {},
 }
 
 -- Setup mason so it can manage external tooling
