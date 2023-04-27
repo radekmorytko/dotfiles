@@ -114,6 +114,10 @@ require('telescope').load_extension('fzy_native')
 -- "t" - term
 -- "c" - command
 
+-- Terminal
+vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
+
+
 -- Telescope
 --
 -- find files
