@@ -7,6 +7,7 @@ HOWTO:
 * mount vDrive (progm+F1)
 * copy the layout file
 * unmount the disk (`diskutil unmount <device>`)
+* deactive vDrive (progm+F1)
 * deactivate power user mode
 
 Mappings, keypad:
