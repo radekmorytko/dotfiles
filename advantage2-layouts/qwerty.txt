@@ -1,0 +1,6 @@
+[up]>[down]
+[down]>[up]
+[rwin]>[ralt]
+[kp-rwin]>[kp-ralt]
+[rctrl]>[rwin]
+[kp-rctrl]>[kp-rwin]
