@@ -1,0 +1,4 @@
+[up]>[down]
+[down]>[up]
+[rwin]>[ralt]
+[kp-rwin]>[kp-ralt]
