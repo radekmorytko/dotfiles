@@ -5,6 +5,8 @@ vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.scrolloff = 8
 
+vim.opt.colorcolumn = "100" -- show a vertical ruler at the specified column
+
 vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true -- search will be case-sensitive if it contains an uppercase letter. ignorecase must be enabled
@@ -14,7 +16,7 @@ vim.o.splitright = true
 
 vim.api.nvim_set_option('enc', 'utf8')
 
-vim.opt.listchars = { trail = "·", tab = "→ " } -- Display trailing space when writing
+vim.opt.listchars = { trail = "·", tab = "→ ", leadmultispace = "   ·"} -- Display trailing space when writing
 vim.o.list = true
 
 vim.opt.clipboard:append { "unnamedplus" }
@@ -193,7 +195,8 @@ vim.keymap.set('n', '<leader>o', 'o<esc>')
 vim.keymap.set('n', '<leader>O', 'O<esc>')
 
 -- Fugitive
-vim.keymap.set('n', '<leader>G', ':G<CR>')
+vim.keymap.set('n', '<leader>Gg', ':G<CR>')
+vim.keymap.set('n', '<leader>Gs', require('telescope.builtin').git_status)
 
 -- LSP
 --vim.lsp.set_log_level("info")
