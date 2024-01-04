@@ -10,15 +10,15 @@ local packages = {
     'airblade/vim-gitgutter',
 
     -- status line plugins
-    'hoob3rt/lualine.nvim',
-    'kyazdani42/nvim-web-devicons',
+    'nvim-tree/nvim-web-devicons',
+    'nvim-lualine/lualine.nvim',
 
     -- tree-sitter
     'nvim-treesitter/nvim-treesitter',
 
     -- mason (manag)
     'williamboman/mason.nvim',
-    "williamboman/mason-lspconfig.nvim",
+    'williamboman/mason-lspconfig.nvim',
 
     -- telescope plugins
     'nvim-lua/popup.nvim',
