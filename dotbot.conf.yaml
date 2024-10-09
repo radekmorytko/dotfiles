@@ -11,6 +11,9 @@
     ~/.dotfiles: ''
     ~/.config/nvim:
         create: true # create parent dir
+    ~/.local/share/nvim/site/pack/local-plugins/start/git-permalink.nvim:
+        create: true
+        path: nvim-plugins/git-permalink.nvim
     ~/.config/kitty:
     ~/.config/direnv:
     ~/.config/i3:
